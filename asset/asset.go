@@ -543,7 +543,13 @@ func (r *RawKeyGenesisSigner) SignGenesis(keyDesc keychain.KeyDescriptor,
 		return nil, nil, err
 	}
 
-	return tweakedPrivKey.PubKey(), sig, nil
+	// Since we'll never query lnd for a tweaked key, it doesn't matter if
+	// we lose the parity information here.
+	tweakedPubKey, _ := schnorr.ParsePubKey(
+		schnorr.SerializePubKey(tweakedPrivKey.PubKey()),
+	)
+
+	return tweakedPubKey, sig, nil
 }
 
 // A compile-time assertion to ensure RawKeyGenesisSigner meets the

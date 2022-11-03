@@ -45,6 +45,12 @@ func (l *LndRpcGenSigner) SignGenesis(keyDesc keychain.KeyDescriptor,
 		return nil, nil, err
 	}
 
+	// Since we'll never query lnd for a tweaked key, it doesn't matter if
+	// we lose the parity information here.
+	tweakedPubKey, _ = schnorr.ParsePubKey(
+		schnorr.SerializePubKey(tweakedPubKey),
+	)
+
 	schnorrSig, err := schnorr.ParseSignature(sig)
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to parse schnorr sig: %w",
