@@ -28,7 +28,7 @@ var addrCommands = []cli.Command{
 const (
 	genesisBootstrapInfo = "genesis_bootstrap_info"
 
-	keyFamName = "key_fam"
+	keyGroupName = "key_group"
 
 	amtName = "amt"
 )
@@ -45,8 +45,8 @@ var newAddrCommand = cli.Command{
 				"asset to receive",
 		},
 		cli.StringFlag{
-			Name:  keyFamName,
-			Usage: "optional, the key family of the asset to receive",
+			Name:  keyGroupName,
+			Usage: "optional, the key group of the asset to receive",
 		},
 		cli.Uint64Flag{
 			Name:  amtName,
@@ -72,14 +72,14 @@ func newAddr(ctx *cli.Context) error {
 		return fmt.Errorf("unable to decode asset genesis bootstrap "+
 			"info: %v", err)
 	}
-	keyFam, err := hex.DecodeString(ctx.String(keyFamName))
+	keyGroup, err := hex.DecodeString(ctx.String(keyGroupName))
 	if err != nil {
-		return fmt.Errorf("unable to decode key fam: %w", err)
+		return fmt.Errorf("unable to decode key group: %w", err)
 	}
 
 	addr, err := client.NewAddr(ctxc, &tarorpc.NewAddrRequest{
 		GenesisBootstrapInfo: genInfo,
-		FamKey:               keyFam,
+		GroupKey:             keyGroup,
 		Amt:                  ctx.Int64(amtName),
 	})
 	if err != nil {
