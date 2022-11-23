@@ -19,8 +19,8 @@ RUN make install
 RUN mv /go/bin/tarod /bin/
 RUN mv /go/bin/tarocli /bin/
 
-WORKDIR /
-COPY ./docker-entrypoint.sh /entrypoint.sh
+
+COPY docker-entrypoint.sh /entrypoint.sh
 
 
 RUN chmod a+x /entrypoint.sh
@@ -29,5 +29,6 @@ VOLUME ["/home/taro/.taro"]
 EXPOSE 10029
 EXPOSE 8089
 
+ENTRYPOINT ["/entrypoint.sh"]
 
-#ENTRYPOINT ["/bin/sh"]
+CMD ["tarod"]

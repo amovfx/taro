@@ -10,7 +10,7 @@ if ! id taro > /dev/null 2>&1; then
 
   echo "adding user taro ($USERID:$GROUPID)"
   addgroup -g $GROUPID taro
-  adduser -u $USERID -D -g taro taro
+  adduser -u $USERID -D -G taro taro
 fi
 
 if [ $(echo "$1" | cut -c1) = "-" ]; then
@@ -19,7 +19,7 @@ if [ $(echo "$1" | cut -c1) = "-" ]; then
   set -- taro "$@"
 fi
 
-if [ "$1" = "taro" ] || [ "$1" = "tarod" ]; then
+if [ "$1" = "tarod" ] || [ "$1" = "tarocli" ]; then
   echo "Running as taro user: $@"
   exec su-exec taro "$@"
 fi
