@@ -10,10 +10,10 @@ ENV CGO_ENABLED=0
 RUN make install
 
 # FINAL IMAGE
-FROM alpine as final
 
-COPY --from=builder /go/bin/tarod /bin/
-COPY --from=builder /go/bin/tarocli /bin/
+
+RUN mv /go/bin/tarod /bin/
+RUN mv /go/bin/tarocli /bin/
 
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
