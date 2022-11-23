@@ -10,7 +10,7 @@ if ! id taro > /dev/null 2>&1; then
 
   echo "adding user taro ($USERID:$GROUPID)"
   addgroup -g $GROUPID taro
-  adduser -D -u $USERID -G taro taro
+  adduser -u $USERID -D -g taro taro
 fi
 
 if [ $(echo "$1" | cut -c1) = "-" ]; then
