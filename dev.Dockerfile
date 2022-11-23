@@ -15,7 +15,12 @@ FROM alpine as final
 COPY --from=builder /go/bin/tarod /bin/
 COPY --from=builder /go/bin/tarocli /bin/
 
+COPY ./docker-entrypoint.sh /entrypoint.sh
+
+RUN chmod a+x /entrypoint.sh
+VOLUME ["/home/taro/.taro"]
+
 EXPOSE 10029
 EXPOSE 8089
 
-ENTRYPOINT ["tarod"]
+ENTRYPOINT ["/entrypoint.sh"]
