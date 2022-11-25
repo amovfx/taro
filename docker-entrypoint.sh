@@ -19,10 +19,10 @@ if [ $(echo "$1" | cut -c1) = "-" ]; then
   set -- taro "$@"
 fi
 
-if [ "$1" = "taro" ] || [ "$1" = "lncli" ]; then
+if [ "$1" = "taro" ] || [ "$1" = "tarod" ]; then
   echo "Running as taro user: $@"
-  exec su-exec tarod "$@"
+  exec su-exec taro "$@"
 fi
-
+echo "Entry Point: "
 echo "$@"
 exec "$@"
