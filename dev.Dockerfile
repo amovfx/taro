@@ -8,6 +8,7 @@ COPY . /app
 ENV CGO_ENABLED=0
 
 RUN make install
+RUN go get -u github.com/derekparker/delve/cmd/dlv
 
 # FINAL IMAGE
 #FROM alpine as final
