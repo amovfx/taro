@@ -10,12 +10,16 @@ ENV CGO_ENABLED=0
 RUN make install
 
 # FINAL IMAGE
-FROM alpine as final
+#FROM alpine as final
 
-COPY --from=builder /go/bin/tarod /bin/
-COPY --from=builder /go/bin/tarocli /bin/
+COPY /go/bin/tarod /bin/
+COPY /go/bin/tarocli /bin/
+
+COPY docker-entrypoint.sh /entrypoint.sh
 
 EXPOSE 10029
 EXPOSE 8089
 
-ENTRYPOINT ["tarod"]
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["tarod"]
