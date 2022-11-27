@@ -13,11 +13,11 @@ if ! id taro > /dev/null 2>&1; then
   adduser -u $USERID -D -G taro taro
 fi
 
-if [ $(echo "$1" | cut -c1) = "-" ]; then
-  echo "$0: assuming arguments for taro"
-  set -- tarod "$@"
-fi
-
+# if [ $(echo "$1" | cut -c1) = "-" ]; then
+#   echo "$0: assuming arguments for taro"
+#   set -- tarod "$@"
+# fi
+sleep 1
 if [ "$1" = "tarod" ] || [ "$1" = "tarocli" ]; then
   echo "Running as taro user: $@"
   exec su-exec taro "$@"

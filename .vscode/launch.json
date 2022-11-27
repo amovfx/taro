@@ -1,0 +1,35 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Connect to server",
+      "type": "go",
+      "request": "attach",
+      "mode": "remote",
+      "remotePath": "${workspaceFolder}",
+      "port": 2345,
+      "host": "127.0.0.1"
+    },
+    {
+      "name": "Debug",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/tarod/main.go",
+      "args": [
+        "--network=regtest",
+        "--lnd.macaroonpath=/Users/andrew/Library/Application Support/Lnd/data/chain/bitcoin/regtest/admin.macaroon",
+        "--lnd.tlspath=/Users/andrew/Library/Application Support/Lnd/tls.cert",
+        "--tarodir=/home/taro/.taro",
+        "--rpclisten=0.0.0.0:10029",
+        "--restlisten=0.0.0.0:8089",
+        "--lnd.host=alice:10009"
+      ],
+      "stopOnEntry": true,
+      "console": "integratedTerminal"
+    }
+  ]
+}
